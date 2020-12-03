@@ -1,0 +1,8 @@
+{
+  "name": "BiotechFront",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
