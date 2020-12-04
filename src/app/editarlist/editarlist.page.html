@@ -1,0 +1,22 @@
+<ion-header id="cabec">
+  <ion-title id="titulo"><h1>Editar lista de exercicios
+      <b>
+      <ion-button id="back" size="small" fill="default" onClick="history.go(-1)">Voltar</ion-button>
+      <input id="pesquisar" type="search" name="pesquisar" placeholder="Digite o código do exercício">
+      </b>
+  </h1></ion-title> 
+</ion-header>
+<ion-content id="lista">
+    <ion-item id="nome">
+        <ion-label style="color: black" position="stacked">Nome:
+        </ion-label>
+        <ion-input [(ngModel)]="editarCategoria.nome" required="true" type="text" name="nome"></ion-input>
+    </ion-item>
+
+    <ion-item id="tipo">
+        <ion-label style="color: black" position="stacked">Tipo:
+        </ion-label>
+        <ion-input [(ngModel)]="editarCategoria.tipo" required="true" id="senha-label" type="text" name="tipo"></ion-input>
+    </ion-item>
+  <ion-button id="criar" (click)="editCategoria()" expand="block">Editar Categoria</ion-button>
+            </ion-content>

@@ -22,6 +22,17 @@ export class CriarListaService{
             }
         );
     }
+
+    update(obj: CategoriaDTO) {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/categorias`,
+            obj,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
     findAll(): Observable<CriarListDTO[]> {
         return this.http.get<CriarListDTO[]>(`${API_CONFIG.baseUrl}/exercicios`);
     }

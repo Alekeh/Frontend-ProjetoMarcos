@@ -55,8 +55,8 @@ export class CatlogPage implements OnInit {
         this.navCtrl.navigateRoot('/criarlist');
     }
     editCategoria(id: string) {
-        this.categoriaService.update(this.editarCategoria).subscribe(request => {
-        });
+        console.log(id);
+        this.navCtrl.navigateRoot('/editarlist/'.concat(id));
     }
     deleteCategoria(id: string) {
         this.deletarCategoria.id = id;

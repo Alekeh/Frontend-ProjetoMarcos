@@ -31,7 +31,10 @@ const routes: Routes = [
         path: 'criarlist',
         loadChildren: () => import('./criarlist/criarlist.module').then(m => m.CriarlistPageModule)
     },
-
+    {
+        path: 'editarlist/:id',
+        loadChildren: () => import('./editarlist/editarlist.module').then(m => m.EditarlistModule)
+    },
 ];
 
 @NgModule({

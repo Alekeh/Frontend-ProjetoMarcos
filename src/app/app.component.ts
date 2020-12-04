@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {NavController, Platform} from '@ionic/angular';
+import {NavController, NavParams, Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
