@@ -7,11 +7,16 @@
   </h1></ion-title> 
 </ion-header>
 <ion-content id="lista">
-  <ion-list *ngFor="let item of items">
-    <ion-item>
-      <ion-label>{{item.nome}}</ion-label>
-    <ion-checkbox id="checkbox" slot="end"></ion-checkbox>
+    <ion-item id="nome">
+        <ion-label style="color: black" position="stacked">Nome:
+        </ion-label>
+        <ion-input [(ngModel)]="cadastrarCategoria.nome" required="true" type="text" name="nome"></ion-input>
     </ion-item>
-  </ion-list>
-  <ion-button id="criar" expand="block">Criar Lista</ion-button>
+
+    <ion-item id="tipo">
+        <ion-label style="color: black" position="stacked">Tipo:
+        </ion-label>
+        <ion-input [(ngModel)]="cadastrarCategoria.tipo" required="true" id="senha-label" type="text" name="tipo"></ion-input>
+    </ion-item>
+  <ion-button id="criar" (click)="cadastroCategoria()" expand="block">Criar Categoria</ion-button>
             </ion-content>

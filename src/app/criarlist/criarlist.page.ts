@@ -7,6 +7,7 @@ import {API_CONFIG} from '../../config/api.config';
 import { LocalUser } from 'src/models/local_user';
 import { CriarListaService } from 'src/services/domain/criarlista.service';
 import { CriarListDTO } from 'src/models/criarlist.dto';
+import {CategoriaDTO} from "../../models/categoria.dto";
 
 @Component({
     selector: 'app-exercicio',
@@ -18,6 +19,11 @@ export class CriarlistPage implements OnInit {
     items: ExercicioDTO[];
     imgUrl: string = API_CONFIG.imgBaseUrl;
 
+        cadastrarCategoria: CategoriaDTO = {
+            id: null,
+            nome: '',
+            tipo: ''
+        };
     constructor(public navCtrl: NavController,
                 public storage: StorageService,
                 public criarlistService: CriarListaService) {
@@ -27,13 +33,16 @@ export class CriarlistPage implements OnInit {
             error => {
                 console.log(error);
             });
-        
         this.criarlistService.findAll().subscribe( response =>{ this.items = response;},
         error => {
             console.log(error);
         } );
-
-       
     }
-
+    cadastroCategoria() {
+        this.criarlistService.insert(this.cadastrarCategoria).subscribe(request => {
+            if (request){
+                this.navCtrl.navigateRoot('/catlog');
+            }
+    });
+    }
 }

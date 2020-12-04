@@ -40,4 +40,7 @@ export class ExerciciosPage implements OnInit {
         });
     }
 
+    editlist() {
+        this.navCtrl.navigateRoot('/editlist');
+    }
 }

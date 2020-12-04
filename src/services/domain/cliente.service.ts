@@ -25,7 +25,7 @@ export class ClienteService {
         return this.http.get<clienteDTO>(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
     }
 
-    findAll() : Observable<clienteDTO[]> {
+    findAll(): Observable<clienteDTO[]> {
         return this.http.get<clienteDTO[]>(`${API_CONFIG.baseUrl}/clientes`);
     }
 

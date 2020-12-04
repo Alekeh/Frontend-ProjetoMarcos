@@ -15,6 +15,16 @@ export class CatlogPage implements OnInit {
     imgUrl: string = API_CONFIG.imgBaseUrl;
     items: CategoriaDTO[];
 
+    editarCategoria: CategoriaDTO = {
+        id: null,
+        nome: '',
+        tipo: ''
+    };
+    deletarCategoria: CategoriaDTO = {
+        id: null,
+        nome: '',
+        tipo: ''
+    };
     constructor(public categoriaService: CategoriaService,
                 public storage: StorageService,
                 public navCtrl: NavController) {
@@ -44,6 +54,17 @@ export class CatlogPage implements OnInit {
     criarlist(){
         this.navCtrl.navigateRoot('/criarlist');
     }
-
+    editCategoria(id: string) {
+        this.categoriaService.update(this.editarCategoria).subscribe(request => {
+        });
+    }
+    deleteCategoria(id: string) {
+        this.deletarCategoria.id = id;
+        this.categoriaService.delete(this.deletarCategoria).subscribe(request => {
+            if (request){
+                this.navCtrl.navigateRoot('/criarlist');
+            }
+        });
+    }
 
 }
