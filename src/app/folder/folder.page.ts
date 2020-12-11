@@ -4,6 +4,7 @@ import {MenuController, NavController} from '@ionic/angular';
 import {CredenciaisDTO} from '../../models/credenciais.dto';
 import {AuthService} from '../../services/auth.service';
 import {ClienteService} from '../../services/domain/cliente.service';
+import {clienteDTO} from "../../models/cliente.dto";
 
 @Component({
     selector: 'app-folder',
@@ -12,7 +13,7 @@ import {ClienteService} from '../../services/domain/cliente.service';
 })
 export class FolderPage implements OnInit {
     public folder: string;
-
+    listaClientes: clienteDTO[];
     credenciais: CredenciaisDTO = {
         email: '',
         senha: ''
@@ -29,12 +30,18 @@ export class FolderPage implements OnInit {
 
     ngOnInit() {
         this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+        this.buscaTodosClientes();
+    }
+
+    private buscaTodosClientes() {
+        this.clienteService.findAll().subscribe(value => {
+            this.listaClientes = value;
+        });
     }
 
 
     login() {
         this.validation();
-
     }
 
     loginSemCadastro() {
@@ -42,21 +49,22 @@ export class FolderPage implements OnInit {
     }
 
     cadastra() {
-        console.log('to aqui');
         this.navCtrl.navigateRoot('/cadastro');
     }
 
     validation() {
         this.erros = [];
-        if (this.credenciais.email == '' || this.credenciais.senha == '') {
-            this.erros.push('*Email ou senha invalidos');
-        }
-
-        else if (this.credenciais.email != 'fellipemarra@hotmail.com' && this.credenciais.senha != '123') {
-            this.erros.push('*Senha invalida');
-        }
-
-        else if(this.erros.length == 0) {
+        this.listaClientes.forEach(value => {
+            if (value.email === this.credenciais.email && '123' === this.credenciais.senha) {
+                this.navCtrl.navigateRoot('/catlog');
+            }else{
+                this.erros.push('Email ou senha incorretos ');
+            }
+            if ('' === this.credenciais.email && '' === this.credenciais.senha) {
+                this.erros.push('Por Favor insira suas credenciais');
+            }
+        });
+        if (this.erros.length === 0) {
             this.navCtrl.navigateRoot('/catlog');
         }
     }

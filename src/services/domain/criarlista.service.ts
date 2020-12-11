@@ -25,7 +25,7 @@ export class CriarListaService{
 
     update(obj: CategoriaDTO) {
         return this.http.put(
-            `${API_CONFIG.baseUrl}/categorias`,
+            `${API_CONFIG.baseUrl}/categorias/`.concat(obj.id),
             obj,
             {
                 observe: 'response',

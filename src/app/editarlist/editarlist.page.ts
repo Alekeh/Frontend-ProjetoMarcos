@@ -8,6 +8,7 @@ import { LocalUser } from 'src/models/local_user';
 import { CriarListaService } from 'src/services/domain/criarlista.service';
 import { CriarListDTO } from 'src/models/criarlist.dto';
 import {CategoriaDTO} from "../../models/categoria.dto";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-exercicio',
@@ -17,6 +18,7 @@ import {CategoriaDTO} from "../../models/categoria.dto";
 export class EditarlistPage implements OnInit {
     itens: CriarListDTO[];
     items: ExercicioDTO[];
+    id: any;
     imgUrl: string = API_CONFIG.imgBaseUrl;
 
         editarCategoria: CategoriaDTO = {
@@ -26,9 +28,11 @@ export class EditarlistPage implements OnInit {
         };
     constructor(public navCtrl: NavController,
                 public storage: StorageService,
-                public criarlistService: CriarListaService) {
+                public criarlistService: CriarListaService,
+                public route: ActivatedRoute) {
     }
     ngOnInit() {
+        this.editarCategoria.id = this.route.snapshot.paramMap.get('id');
         this.criarlistService.findAll().subscribe(response => {this.itens = response; },
             error => {
                 console.log(error);
@@ -39,6 +43,7 @@ export class EditarlistPage implements OnInit {
         } );
     }
     editCategoria() {
+        console.log(this.editarCategoria);
         this.criarlistService.update(this.editarCategoria).subscribe(request => {
             if (request){
                 this.navCtrl.navigateRoot('/catlog');
